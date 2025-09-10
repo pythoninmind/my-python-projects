@@ -1,0 +1,81 @@
+"""
+Dark theme: Stylish black and gray tones.
+
+Responsive layout: Buttons adjust to window size.
+
+Error handling: If the user enters an invalid expression, it shows "Error".
+"""
+
+# import tkinter, python's built-in gui toolkit
+import tkinter as tk
+# in tkinter you can also customize the appearance of text
+# like button labels and the display 
+from tkinter import font
+
+# define a class that inherits from Tk, the main window object in tkinter
+# sets up calculator window and its components
+class Calculator(tk.Tk):
+    # initializing
+    def __init__(self):
+        super().__init__()
+        # sets the title
+        self.title("Taschenrechner")
+        # sets window size
+        self.geometry("300x400")
+        # define background color
+        self.configure(bg="#2e2e2e")
+        # disables resizing
+        self.resizable(False, False)
+        # creates a custom font for buttons and display
+        self.custom_font = font.Font(family="Helvetica", size=18, weight="bold")
+        # initializes StringVar() function to hold the current input/output value
+        self.result_var = tk.StringVar()
+        # calls create_widgets() to build the interface
+        self.create_widgets()
+    
+    # gui creation
+    def create_widgets(self):
+        # adds entry field at the top where the user checks input and result
+        display = tk.Entry(self, textvariable=self.result_var, font=self.custom_font,
+                           bg="#1e1e1e", fg="#ffffff", bd=0, justify="right")
+        display.pack(fill="both", padx=10, pady=20, ipady=10)
+
+        # creates a grid of buttons (numbers, operations, clear, equals)
+        buttons = [
+            ["7", "8", "9", "/"],
+            ["4", "5", "6", "*"],
+            ["1", "2", "3", "-"],
+            ["0", ".", "=", "+"],
+            ["C"]
+        ]
+        # each button is styled and linked to a function that handles clicks
+        for row in buttons:
+            frame = tk.Frame(self, bg="#2e2e2e")
+            frame.pack(expand=True, fill="both")
+            for btn_text in row:
+                btn = tk.Button(frame, text=btn_text, font=self.custom_font,
+                                bg="#3e3e3e", fg="#ffffff", bd=0, relief="flat",
+                                command=lambda txt=btn_text: self.on_click(txt))
+                btn.pack(side="left", expand=True, fill="both", padx=5, pady=5)
+    # button click handling
+    def on_click(self, char):
+        # if user clicks C, display is cleared
+        if char == "C":
+            self.result_var.set("")
+        # if = is clicked, it evaluates the expression using pythons's eval() function
+        elif char == "=":
+            try:
+                result = eval(self.result_var.get())
+                self.result_var.set(str(result))
+            except Exception:
+                self.result_var.set("Error")
+        # if any other button is clicked, it appends that character to the current input
+        else:
+            current = self.result_var.get()
+            self.result_var.set(current + char)
+            
+# running the app, this starts the calculator application and keeps
+# the window open until the user closes
+if __name__ == "__main__":
+    app = Calculator()
+    app.mainloop()
