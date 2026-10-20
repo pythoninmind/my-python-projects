@@ -1,4 +1,4 @@
-Here is a collection of my python projects. Have fun!#
+Here is a collection of my python projects. Have fun!
 
 email_excel_automation_tool: 
 - reads E-Mails through IMAP
