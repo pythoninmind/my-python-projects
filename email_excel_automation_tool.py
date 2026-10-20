@@ -1,3 +1,10 @@
+***
+Features i want to add: 
+Filter for bills
+PDF-recognition
+automatically moving to directory
+Dashboard with Streamlit
+***
 import imaplib
 import email
 from email.header import decode_header
@@ -6,15 +13,15 @@ import pandas as pd
 
 # ===== Konfiguration =====
 IMAP_SERVER = "imap.gmail.com"
-EMAIL_ACCOUNT = "deine_email@gmail.com"
+EMAIL_ACCOUNT = "your_email@gmail.com"
 EMAIL_PASSWORD = "app_passwort"
 
 ATTACHMENT_FOLDER = "attachments"
 
-# Ordner erstellen
+# create directory
 os.makedirs(ATTACHMENT_FOLDER, exist_ok=True)
 
-# Verbindung herstellen
+# establish connection
 mail = imaplib.IMAP4_SSL(IMAP_SERVER)
 mail.login(EMAIL_ACCOUNT, EMAIL_PASSWORD)
 
@@ -68,13 +75,13 @@ for email_id in email_ids[-20:]:
                         f.write(part.get_payload(decode=True))
 
             report_data.append({
-                "Absender": sender,
-                "Betreff": subject,
-                "Datum": date,
-                "Anhänge": attachment_count
+                "Sender": sender,
+                "Subject": subject,
+                "Date": date,
+                "Attachments": attachment_count
             })
 
-# Excel-Bericht erzeugen
+# create excel-report
 df = pd.DataFrame(report_data)
 
 excel_file = "email_report.xlsx"
@@ -91,7 +98,7 @@ with pd.ExcelWriter(
     )
 
 print(
-    f"Bericht erstellt: {excel_file}"
+    f"Report created: {excel_file}"
 )
 
 mail.logout()
