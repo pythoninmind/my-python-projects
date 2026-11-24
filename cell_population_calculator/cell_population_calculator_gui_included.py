@@ -28,7 +28,7 @@ class CellSimulator(QWidget):
     layout.addWidget(self.input_days)
 
     # Start Button 
-    self.btn_calc = QPushButton("Calculate")
+    self.btn_calc = QPushButton("Berechnen")
     self.btn_calc.clicked.connect(self.calculate_growth)
     layout.addWidget(self.btn_calc)
 
@@ -38,26 +38,26 @@ class CellSimulator(QWidget):
     layout.addWidget(self.output_area)
 
     self.setLayout(layout)
-# Function for calculation
-def calculate_growth(self):
-  self.output_area.clear()
-  # input cells and days
-  try:
-    cells = int(self.input_cells.text())
-    days = int(self.input_days.text())
-  except ValueError:
-    self.ouput_area.setText("Insert numbers, please.")
-    return
-  # counter
-  counter = 1
-  while counter <= days:
-    cells = cells * 2
-    self.output_area.append(f"Day {counter}: {cells}")
-    counter = counter + 1
+
+    # Function for calculation
+    def calculate_growth(self):
+      self.output_area.clear()
+      # input cells and days
+      try:
+        cells = int(self.input_cells.text())
+        days = int(self.input_days.text())
+      except ValueError:
+        self.ouput_area.setText("Insert numbers, please.")
+        return
+      # counter
+      counter = 1
+      while counter <= days:
+        cells = cells * 2
+        self.output_area.append(f"Day {counter}: {cells}")
+        counter = counter + 1
 
 if __name__ == "__main__":
   app = QApplication(sys.argv)
   window = CellSimulator()
   window.show()
   sys.exit(app.exec())
-    
