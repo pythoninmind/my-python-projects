@@ -10,7 +10,7 @@ class CellSimulator(QWidget):
     self.init_ui()
   # 
   def init_ui(self):
-    self.setWindowTitle("Zellwachstum Simulator")
+    self.setWindowTitle("Cellgrowth Simulator")
     self.resize(300, 350)
 
     layout = QVBoxLayout()
