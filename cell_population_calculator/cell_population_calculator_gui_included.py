@@ -28,7 +28,7 @@ class CellSimulator(QWidget):
     layout.addWidget(self.input_days)
 
     # Start Button 
-    self.btn_calc = QPushButton("Berechnen")
+    self.btn_calc = QPushButton("Calculate")
     self.btn_calc.clicked.connect(self.calculate_growth)
     layout.addWidget(self.btn_calc)
 
