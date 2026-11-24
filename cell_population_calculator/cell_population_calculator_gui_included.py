@@ -11,7 +11,7 @@ class CellSimulator(QWidget):
   # 
   def init_ui(self):
     self.setWindowTitle("Cellgrowth Simulator")
-    self.resize(300, 350)
+    self.resize(300, 300)
 
     layout = QVBoxLayout()
 
@@ -39,22 +39,22 @@ class CellSimulator(QWidget):
 
     self.setLayout(layout)
 
-    # Function for calculation
-    def calculate_growth(self):
-      self.output_area.clear()
-      # input cells and days
-      try:
-        cells = int(self.input_cells.text())
-        days = int(self.input_days.text())
-      except ValueError:
-        self.ouput_area.setText("Insert numbers, please.")
-        return
-      # counter
-      counter = 1
-      while counter <= days:
-        cells = cells * 2
-        self.output_area.append(f"Day {counter}: {cells}")
-        counter = counter + 1
+  # Function for calculation
+  def calculate_growth(self):
+    self.output_area.clear()
+    # input cells and days
+    try:
+     cells = int(self.input_cells.text())
+     days = int(self.input_days.text())
+    except ValueError:
+     self.ouput_area.setText("Insert numbers, please.")
+     return
+    # counter
+    counter = 1
+    while counter <= days:
+     cells = cells * 2
+     self.output_area.append(f"Day {counter}: {cells}")
+     counter = counter + 1
 
 if __name__ == "__main__":
   app = QApplication(sys.argv)
